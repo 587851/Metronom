@@ -13,8 +13,8 @@ public class Metronome {
 
     private Timer timer;
     private TimerTask timerTask;
-    private SoundPool soundPool;
-    private int dogBarking, drumstick;
+    private final SoundPool soundPool;
+    private final int dogBarking, drumstick;
     private int tempo = 100;
     private boolean isPlaying = false;
 

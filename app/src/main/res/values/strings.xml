@@ -2,4 +2,9 @@
     <string name="app_name">Metronome</string>
     <string name="textString">100</string>>
     <string name="tempoWarning">Lowest: 1, Highest 300</string>
+    <string name="minusEn">-1</string>
+    <string name="minusFem">-5</string>
+    <string name="plussEn">+1</string>
+    <string name="plussFem">+5</string>
+    <string name="start">Start</string>
 </resources>
