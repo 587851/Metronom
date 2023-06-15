@@ -10,7 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.slider.Slider;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
@@ -35,6 +38,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tempoText = (EditText) findViewById(R.id.tempoText);
         tempoText.addTextChangedListener(this);
         warningText = (TextView) findViewById(R.id.textView);
+
+        Slider tempoSlider = findViewById(R.id.slider);
+        tempoSlider.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                metronome.setTempo((int)value);
+                metronome.changeActiveTempo();
+                tempoText.setText(String.valueOf((int)value));
+            }
+        });
 
         Button addFiveButton = findViewById(R.id.buttonAddFive);
         addFiveButton.setOnClickListener(this);
