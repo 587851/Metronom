@@ -1,5 +1,6 @@
 package com.example.metronome;
 
+import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         removeOneButton.setOnClickListener(this);
         playTempoButton = findViewById(R.id.buttonPlayTempo);
         playTempoButton.setOnClickListener(this);
+        ImageButton settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(this);
 
 
 
@@ -84,11 +88,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 playTempoButton.setText("Start");
                 metronome.stop();
             }
+        } else if(id == R.id.settingsButton){
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         }
 
         int tempo = metronome.getTempo();
         tempoText.setText(String.valueOf(tempo));
-
     }
 
     @Override
