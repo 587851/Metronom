@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,8 +24,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private EditText tempoText;
     private TextView warningText;
-    private Metronome metronome;
+    static public Metronome metronome;
     Button playTempoButton;
+    private long lastChangeTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +65,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         removeOneButton.setOnClickListener(this);
         playTempoButton = findViewById(R.id.buttonPlayTempo);
         playTempoButton.setOnClickListener(this);
-        ImageButton settingsButton = findViewById(R.id.settingsButton);
-        settingsButton.setOnClickListener(this);
 
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(R.id.settings == id){
+            stopMetronome();
+
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }else{
+            return(super.onOptionsItemSelected(item));
+        }
     }
 
     @Override
@@ -82,18 +103,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             metronome.removeFromTempo(1);
         } else if(id == R.id.buttonPlayTempo){
             if(!metronome.getIsPlaying()){
-                playTempoButton.setText("Stop");
-                metronome.start();
+                startMetronome();
             }else{
-                playTempoButton.setText("Start");
-                metronome.stop();
+                stopMetronome();
             }
-        } else if(id == R.id.settingsButton){
-            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         }
-
         int tempo = metronome.getTempo();
         tempoText.setText(String.valueOf(tempo));
+    }
+
+    public void startMetronome(){
+        playTempoButton.setText("Stop");
+        metronome.start();
+    }
+    public void stopMetronome(){
+        playTempoButton.setText("Start");
+        metronome.stop();
     }
 
     @Override
@@ -125,8 +150,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             warningText.setText(getString(R.string.tempoWarning));
         }
 
-        metronome.setTempo(tempo);
-        metronome.changeActiveTempo();
+        if(tempo != metronome.getTempo()){
+            metronome.setTempo(tempo);
+            metronome.changeActiveTempo();
+        }
     }
 
 

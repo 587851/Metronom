@@ -5,16 +5,24 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class Metronome {
 
     private Timer timer;
     private TimerTask timerTask;
-    private final SoundPool soundPool;
-    private final int dogBarking, drumstick;
+    private SoundPool soundPool;
+    private ArrayList<Integer> soundIDs;
+    private int activeSound = -1;
     private int tempo = 100;
     private boolean isPlaying = false;
 
@@ -36,34 +44,48 @@ public class Metronome {
                         .build();
         }
         else {
-            soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
+            soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         }
 
-        dogBarking = soundPool.load(c, R.raw.dogbarking, 1);
-        drumstick = soundPool.load(c, R.raw.softsound, 1);
+        loadSounds(c);
+        activeSound = soundIDs.get(0);
+    }
+
+    public void loadSounds(Context c){
+        soundIDs = new ArrayList<Integer>();
+        soundIDs.add(soundPool.load(c, R.raw.softsound, 1));
+        soundIDs.add(soundPool.load(c, R.raw.drumstick, 1));
+        soundIDs.add(soundPool.load(c, R.raw.dogbarking, 1));
+    }
+
+    public int getActiveSoundPosition(){
+        return soundIDs.indexOf(activeSound);
+    }
+    public void changeActiveSound(int position){
+        activeSound = soundIDs.get(position);
     }
 
     public void start(){
         if(!isPlaying){
+            isPlaying = true;
             timer = new Timer();
             timerTask = new TimerTask() {
                 @Override
                 public void run() {
-                    soundPool.play(drumstick, 1, 1, 0, 0, 1);
+                    soundPool.play(activeSound, 1, 1, 0, 0, 1);
                 }
             };
-            timer.scheduleAtFixedRate(timerTask, 0, calculateInterval());
-            isPlaying = true;
+            timer.scheduleAtFixedRate(timerTask, 150, calculateInterval());
         }
     }
 
     public void stop() {
         if (isPlaying) {
+            isPlaying = false;
             timerTask.cancel();
             timer.purge();
             timer = null;
             timerTask = null;
-            isPlaying = false;
         }
     }
 
@@ -110,4 +132,5 @@ public class Metronome {
     public void release(){
         soundPool.release();
     }
+
 }
