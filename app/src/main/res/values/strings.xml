@@ -27,6 +27,8 @@
     <string name="background_color">Background color</string>
     <string name="back_to_metronome">Back to the metronome</string>
     <string name="metronome_sound_setting">Metronome sound</string>
+    <string name="tuner">Tuner</string>
+    <string name="Metronome">Metronome</string>
 
     <string-array name="metronome_sounds">
         <item>Soft sound</item>

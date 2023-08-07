@@ -75,7 +75,7 @@ public class Metronome {
                     soundPool.play(activeSound, 1, 1, 0, 0, 1);
                 }
             };
-            timer.scheduleAtFixedRate(timerTask, 150, calculateInterval());
+            timer.scheduleAtFixedRate(timerTask, 250, calculateInterval());
         }
     }
 
