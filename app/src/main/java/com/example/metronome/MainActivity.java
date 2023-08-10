@@ -1,11 +1,8 @@
 package com.example.metronome;
 
 import android.content.Intent;
-import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -15,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.metronome.Tuner.TunerActivity;
 import com.google.android.material.slider.Slider;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
