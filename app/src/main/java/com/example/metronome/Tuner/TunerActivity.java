@@ -21,10 +21,14 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
     private LydOpptaker recorder;
     private LydKalkulator audioCalculator;
     private Handler handler;
+    private Tuner tuner;
 
     private TextView textAmplitude;
     private TextView textDecibel;
+
     private TextView textFrequency;
+    private TextView textNote;
+    private TextView textCent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +38,14 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
         recorder = new LydOpptaker(callback);
         audioCalculator = new LydKalkulator();
         handler = new Handler(Looper.getMainLooper());
+        tuner = new Tuner();
+
 
         textAmplitude = (TextView) findViewById(R.id.textAmplitude);
         textDecibel = (TextView) findViewById(R.id.textDecibel);
         textFrequency = (TextView) findViewById(R.id.textFrequency);
+        textNote = (TextView) findViewById(R.id.textNote);
+        textCent = (TextView) findViewById(R.id.textCent);
 
         Button toMetronomeButton = findViewById(R.id.to_metronome_button);
         toMetronomeButton.setOnClickListener(this);
@@ -62,10 +70,13 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
             int amplitude = audioCalculator.getAmplitude();
             double decibel = audioCalculator.getDecibel();
             double frequency = audioCalculator.getFrequency();
+            double cent = tuner.getCent(frequency);
 
             final String amp = String.valueOf(amplitude + " Amp");
             final String db = String.valueOf(decibel + " db");
             final String hz = String.valueOf(frequency + " Hz");
+            final String note = tuner.frekvensTilNote(frequency);
+            final String ce = cent + " Cent";
 
             handler.post(new Runnable() {
                 @Override
@@ -73,6 +84,8 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
                     textAmplitude.setText(amp);
                     textDecibel.setText(db);
                     textFrequency.setText(hz);
+                    textNote.setText(note);
+                    textCent.setText(ce);
                 }
             });
         }
