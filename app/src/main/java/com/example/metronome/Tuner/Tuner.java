@@ -1,11 +1,5 @@
 package com.example.metronome.Tuner;
 
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
-
-import java.util.HashMap;
-
 public class Tuner {
 
     private int stemmeFrekvens = 440;

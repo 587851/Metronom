@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.metronome.MainActivity;
@@ -29,6 +30,8 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
     private TextView textFrequency;
     private TextView textNote;
     private TextView textCent;
+    private ImageView redArrow;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
         textFrequency = (TextView) findViewById(R.id.textFrequency);
         textNote = (TextView) findViewById(R.id.textNote);
         textCent = (TextView) findViewById(R.id.textCent);
+        redArrow = (ImageView) findViewById(R.id.redArrow);
 
         Button toMetronomeButton = findViewById(R.id.to_metronome_button);
         toMetronomeButton.setOnClickListener(this);
@@ -77,6 +81,7 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
             final String hz = String.valueOf(frequency + " Hz");
             final String note = tuner.frekvensTilNote(frequency);
             final String ce = cent + " Cent";
+            final float arrowDegree = (float) ((57/50) * cent);
 
             handler.post(new Runnable() {
                 @Override
@@ -86,6 +91,7 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
                     textFrequency.setText(hz);
                     textNote.setText(note);
                     textCent.setText(ce);
+                    redArrow.setRotation(arrowDegree);
                 }
             });
         }

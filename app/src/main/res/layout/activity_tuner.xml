@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Tuner.TunerActivity">
 
     <Button
@@ -20,11 +21,9 @@
         android:id="@+id/textAmplitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="89dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:text="Amplitude: 0"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,49 +31,80 @@
         android:id="@+id/textDecibel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:text="Decibel: 0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textAmplitude" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textAmplitude"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textFrequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
         android:text="Frequency: 0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDecibel" />
+        app:layout_constraintStart_toEndOf="@+id/textDecibel"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:text="Note"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFrequency" />
+        app:layout_constraintTop_toBottomOf="@+id/textAmplitude" />
 
     <TextView
         android:id="@+id/textCent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="10dp"
         android:text="Cent"
+        app:layout_constraintStart_toEndOf="@+id/textNote"
+        app:layout_constraintTop_toBottomOf="@+id/textAmplitude" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/tunerfargee"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/redArrow"
+        android:layout_width="29dp"
+        android:layout_height="334dp"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="216dp"
+        android:layout_marginEnd="160dp"
+        android:src="@drawable/redarroww"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNote" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/halfCircle"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="327dp"
+        android:layout_marginEnd="160dp"
+        android:src="@drawable/halfcirclee"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
