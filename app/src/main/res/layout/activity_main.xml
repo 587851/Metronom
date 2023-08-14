@@ -10,20 +10,20 @@
         android:id="@+id/slider"
         android:layout_width="268dp"
         android:layout_height="45dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="26dp"
+        android:stepSize="1"
         android:value="100.0"
         android:valueFrom="1.0"
         android:valueTo="300.0"
-        android:stepSize="1"
-        app:tickVisible="false"
         app:labelBehavior="gone"
         app:layout_constraintBottom_toTopOf="@+id/buttonPlayTempo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonRemoveFive"
-        app:layout_constraintVertical_bias="1.0" />
+        app:tickVisible="false" />
 
     <EditText
         android:id="@+id/tempoText"
@@ -90,13 +90,13 @@
         android:id="@+id/buttonPlayTempo"
         android:layout_width="250dp"
         android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRemoveFive"
-        app:layout_constraintVertical_bias="0.352" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonRemoveFive" />
 
     <TextView
         android:id="@+id/textView"
@@ -110,6 +110,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.43" />
+
+    <Button
+        android:id="@+id/tuner_button"
+        android:layout_width="250dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/tuner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlayTempo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
