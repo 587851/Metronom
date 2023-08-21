@@ -11,6 +11,8 @@
         android:id="@+id/to_metronome_button"
         android:layout_width="250dp"
         android:layout_height="49dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
         android:layout_marginBottom="32dp"
         android:text="@string/Metronome"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="Amplitude: 0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:text="Decibel: 0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textAmplitude"
@@ -45,7 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:text="Frequency: 0"
         app:layout_constraintStart_toEndOf="@+id/textDecibel"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,12 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="128dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="128dp"
-        android:text="Note"
         android:gravity="center"
-        android:textStyle="bold"
+        android:text="Note"
         android:textSize="32dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,11 +68,12 @@
         android:id="@+id/textCent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
         android:text="Cent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNote" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -115,12 +115,23 @@
         android:id="@+id/spinnerFrequency"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginEnd="128dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerPitch"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerPitch"
+        android:layout_width="100dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/spinnerFrequency" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

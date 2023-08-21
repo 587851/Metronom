@@ -49,12 +49,12 @@ public class LydKalkulator {
     public int[] getAmplitudeLevels() {
         if (amplitudes == null) getAmplitudes();
         int major = 0;
-        int minor = 0;
+        int minor = Integer.MAX_VALUE; // Initialize with a large value
         for (int i : amplitudes) {
             if (i > major) major = i;
             if (i < minor) minor = i;
         }
-        amplitude = Math.max(major, minor * (-1));
+        amplitude = Math.max(major, Math.abs(minor)); // Using Math.abs to ensure positive value
         return new int[] {major, minor};
     }
 

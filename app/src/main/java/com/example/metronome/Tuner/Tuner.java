@@ -3,6 +3,7 @@ package com.example.metronome.Tuner;
 public class Tuner {
 
     private int stemmeFrekvens = 440;
+    private int pitch = 0;
 
     private String[] noteNavn = {"G#*/Ab*", "A*", "A#*/Bb*", "B*", "C*", "C#*/Db*", "D*", "D#*/Eb*", "E*", "F*", "F#*/Gb*", "G*"};
 
@@ -16,6 +17,11 @@ public class Tuner {
 
     public int getStemmeFrekvens(){
         return stemmeFrekvens;
+    }
+
+    public void setPitch(int pitch){ this.pitch = pitch; }
+    public int getPitch(){
+        return pitch;
     }
 
     public String frekvensTilNote(double frekvens){
@@ -33,7 +39,7 @@ public class Tuner {
 
     public String toneNummerTilTone(double noteNummer) {
 
-        int index = (int) Math.floor((noteNummer + 0.5) % 12);
+        int index = (int) Math.floor((noteNummer + 0.5 - pitch) % 12);
         int toneHøyde = ((int) Math.round(noteNummer) + 8) / 12;
 
         char toneHøydeChar = (char) ('0' + toneHøyde); // Konverter til char

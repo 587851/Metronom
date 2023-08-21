@@ -33,4 +33,19 @@
         <item>449</item>
         <item>450</item>
     </string-array>
+
+    <string-array name="tuner_Pitch">
+        <item>C</item>
+        <item>C#/Db</item>
+        <item>D</item>
+        <item>D#/Eb</item>
+        <item>E</item>
+        <item>F</item>
+        <item>F#/Gb</item>
+        <item>G</item>
+        <item>G#/Ab</item>
+        <item>A</item>
+        <item>A#/Bb</item>
+        <item>B</item>
+    </string-array>
 </resources>

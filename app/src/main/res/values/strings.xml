@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Metronome</string>
+    <string name="app_name">Metronome/Tuner</string>
     <string name="textString">100</string>>
     <string name="tempoWarning">Lowest: 1, Highest 300</string>
     <string name="minusEn">-1</string>
