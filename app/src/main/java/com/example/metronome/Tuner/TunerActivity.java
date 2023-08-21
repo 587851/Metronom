@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.metronome.MainActivity;
@@ -17,7 +20,7 @@ import com.example.metronome.Tuner.Kalkulatorere.LydKalkulator;
 import com.example.metronome.Tuner.LydOpptak.Callback;
 import com.example.metronome.Tuner.LydOpptak.LydOpptaker;
 
-public class TunerActivity extends AppCompatActivity implements View.OnClickListener {
+public class TunerActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private LydOpptaker recorder;
     private LydKalkulator audioCalculator;
@@ -53,6 +56,14 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
 
         Button toMetronomeButton = findViewById(R.id.to_metronome_button);
         toMetronomeButton.setOnClickListener(this);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerFrequency);
+        ArrayAdapter<CharSequence> differenceFrequencies = ArrayAdapter.createFromResource(this,
+                R.array.tuner_Frequency, android.R.layout.simple_spinner_item);
+        differenceFrequencies.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(differenceFrequencies);
+        spinner.setOnItemSelectedListener(this);
+        spinner.setSelection(10);
     }
 
     @Override
@@ -71,10 +82,17 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
         @Override
         public void onBufferAvailable(byte[] buffer) {
             audioCalculator.setBytes(buffer);
+
             int amplitude = audioCalculator.getAmplitude();
             double decibel = audioCalculator.getDecibel();
             double frequency = audioCalculator.getFrequency();
+
+            if(decibel < -10){
+                frequency = tuner.getStemmeFrekvens();
+            }
+
             double cent = tuner.getCent(frequency);
+
 
             final String amp = String.valueOf(amplitude + " Amp");
             final String db = String.valueOf(decibel + " db");
@@ -109,4 +127,16 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
         recorder.stop();
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        onPause();
+        int n = Integer.parseInt((String) parent.getItemAtPosition(position));
+        tuner.setStemmeFrekvens(n);
+        onResume();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

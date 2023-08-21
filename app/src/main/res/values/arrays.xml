@@ -9,4 +9,28 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="tuner_Frequency">
+        <item>430</item>
+        <item>431</item>
+        <item>432</item>
+        <item>433</item>
+        <item>434</item>
+        <item>435</item>
+        <item>436</item>
+        <item>437</item>
+        <item>438</item>
+        <item>439</item>
+        <item>440</item>
+        <item>441</item>
+        <item>442</item>
+        <item>443</item>
+        <item>444</item>
+        <item>445</item>
+        <item>446</item>
+        <item>447</item>
+        <item>448</item>
+        <item>449</item>
+        <item>450</item>
+    </string-array>
 </resources>
