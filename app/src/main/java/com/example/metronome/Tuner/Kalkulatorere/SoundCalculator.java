@@ -1,6 +1,6 @@
 package com.example.metronome.Tuner.Kalkulatorere;
 
-public class LydKalkulator {
+public class SoundCalculator {
 
     private byte[] bytes;
     private int[] amplitudes;
@@ -9,10 +9,10 @@ public class LydKalkulator {
     private int amplitude;
     private double decibel;
 
-    public LydKalkulator() {
+    public SoundCalculator() {
     }
 
-    public LydKalkulator(byte[] bytes) {
+    public SoundCalculator(byte[] bytes) {
         this.bytes = bytes;
         amplitudes = null;
         decibels = null;
@@ -78,10 +78,10 @@ public class LydKalkulator {
         int sampleSize = 8192;
         while (sampleSize > length) sampleSize = sampleSize >> 1;
 
-        FrekvensKalkulator frekvensKalkulator = new FrekvensKalkulator(sampleSize);
-        frekvensKalkulator.feedData(bytes, length);
+        FrequenceCalulator frequenceCalulator = new FrequenceCalulator(sampleSize);
+        frequenceCalulator.feedData(bytes, length);
 
-        return resizeNumber(frekvensKalkulator.getFreq());
+        return resizeNumber(frequenceCalulator.getFreq());
     }
 
     private double getRealDecibel(int amplitude) {

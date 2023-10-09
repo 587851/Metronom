@@ -11,8 +11,8 @@
         android:id="@+id/to_metronome_button"
         android:layout_width="250dp"
         android:layout_height="49dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
         android:layout_marginBottom="32dp"
         android:text="@string/Metronome"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -111,27 +111,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinnerFrequency"
-        android:layout_width="100dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerPitch"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Frequency"
+        app:layout_constraintBottom_toTopOf="@+id/to_metronome_button"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout2"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <Spinner
-        android:id="@+id/spinnerPitch"
-        android:layout_width="100dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextViewFrequency"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:dropDownHeight="250dp"
+            android:inputType="none"
+            android:text="440" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Pitch"
+        app:layout_constraintBottom_toTopOf="@+id/to_metronome_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinnerFrequency" />
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextViewPitch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:dropDownHeight="250dp"
+            android:inputType="none"
+            android:text="C" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

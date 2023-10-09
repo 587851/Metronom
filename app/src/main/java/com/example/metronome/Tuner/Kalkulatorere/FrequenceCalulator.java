@@ -2,7 +2,7 @@ package com.example.metronome.Tuner.Kalkulatorere;
 
 import java.util.Arrays;
 
-public class FrekvensKalkulator {
+public class FrequenceCalulator {
 
     private RealDoubleFFT spectrumAmpFFT;
     private double[] spectrumAmpOutCum;
@@ -39,7 +39,7 @@ public class FrekvensKalkulator {
         }
     }
 
-    public FrekvensKalkulator(int fftlen) {
+    public FrequenceCalulator(int fftlen) {
         init(fftlen);
     }
 

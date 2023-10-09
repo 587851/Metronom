@@ -7,7 +7,7 @@ import android.media.MediaRecorder;
 import android.os.Process;
 import android.util.Log;
 
-public class LydOpptaker {
+public class SoundRecorder {
 
     private int audioSource = MediaRecorder.AudioSource.DEFAULT;
     private int channelConfig = AudioFormat.CHANNEL_IN_MONO;
@@ -16,10 +16,10 @@ public class LydOpptaker {
     private Thread thread;
     private Callback callback;
 
-    public LydOpptaker(){
+    public SoundRecorder(){
     }
 
-    public LydOpptaker(Callback callback) {
+    public SoundRecorder(Callback callback) {
         this.callback = callback;
     }
 
@@ -41,7 +41,7 @@ public class LydOpptaker {
                     Thread.currentThread().interrupt();
                     return;
                 } else {
-                    Log.i(LydOpptaker.class.getSimpleName(), "Started.");
+                    Log.i(SoundRecorder.class.getSimpleName(), "Started.");
                     //callback.onStart();
                 }
                 byte[] buffer = new byte[minBufferSize];
@@ -53,7 +53,7 @@ public class LydOpptaker {
                 recorder.stop();
                 recorder.release();
             }
-        }, LydOpptaker.class.getName());
+        }, SoundRecorder.class.getName());
         thread.start();
     }
 

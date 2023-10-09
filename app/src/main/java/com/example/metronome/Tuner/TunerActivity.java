@@ -12,22 +12,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.metronome.MainActivity;
 import com.example.metronome.R;
 import com.example.metronome.SettingsActivity;
-import com.example.metronome.Tuner.Kalkulatorere.LydKalkulator;
+import com.example.metronome.Tuner.Kalkulatorere.SoundCalculator;
 import com.example.metronome.Tuner.LydOpptak.Callback;
-import com.example.metronome.Tuner.LydOpptak.LydOpptaker;
+import com.example.metronome.Tuner.LydOpptak.SoundRecorder;
 
-public class TunerActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class TunerActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
-    private LydOpptaker recorder;
-    private LydKalkulator audioCalculator;
+    private SoundRecorder recorder;
+    private SoundCalculator audioCalculator;
     private Handler handler;
     private Tuner tuner;
 
@@ -45,8 +45,8 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tuner);
 
-        recorder = new LydOpptaker(callback);
-        audioCalculator = new LydKalkulator();
+        recorder = new SoundRecorder(callback);
+        audioCalculator = new SoundCalculator();
         handler = new Handler(Looper.getMainLooper());
         tuner = new Tuner();
 
@@ -61,21 +61,19 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
         Button toMetronomeButton = findViewById(R.id.to_metronome_button);
         toMetronomeButton.setOnClickListener(this);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerFrequency);
-        ArrayAdapter<CharSequence> differenceFrequencies = ArrayAdapter.createFromResource(this,
-                R.array.tuner_Frequency, android.R.layout.simple_spinner_item);
-        differenceFrequencies.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(differenceFrequencies);
-        spinner.setOnItemSelectedListener(this);
-        spinner.setSelection(10);
+        AutoCompleteTextView frequencyList = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewFrequency);
+        ArrayAdapter<CharSequence> differenceFrequency2 = ArrayAdapter.createFromResource(this,
+                R.array.tuner_Frequency, R.layout.frequency_drowdown_item);
+        frequencyList.setAdapter(differenceFrequency2);
+        frequencyList.setOnItemClickListener(this);
 
-        Spinner pitchSpinner = (Spinner) findViewById(R.id.spinnerPitch);
-        ArrayAdapter<CharSequence> differencePitches = ArrayAdapter.createFromResource(this,
-                R.array.tuner_Pitch, android.R.layout.simple_spinner_item);
-        differencePitches.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        pitchSpinner.setAdapter(differencePitches);
-        pitchSpinner.setOnItemSelectedListener(this);
-        pitchSpinner.setSelection(0);
+        AutoCompleteTextView pitchList = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextViewPitch);
+        ArrayAdapter<CharSequence> differencePitch = ArrayAdapter.createFromResource(this,
+                R.array.tuner_Pitch, R.layout.pitch_dropdown_item);
+        pitchList.setAdapter(differencePitch);
+        pitchList.setOnItemClickListener(this);
+
+
     }
 
     @Override
@@ -99,14 +97,14 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
             double decibel = audioCalculator.getDecibel();
             double frequency = audioCalculator.getFrequency();
             if(decibel < -10){
-                frequency = tuner.getStemmeFrekvens();
+                frequency = tuner.getTuningFrequency();
             }
             double cent = tuner.getCent(frequency);
 
             //final String amp = String.valueOf(amplitude + " Amp");
             //final String db = String.valueOf(decibel + " db");
             //final String hz = String.valueOf(frequency + " Hz");
-            final String note = tuner.frekvensTilNote(frequency);
+            final String note = tuner.frequencyToNote(frequency);
             final String ce = cent + " Ȼ";
             final float arrowDegree = (float) ((57/50) * cent);
 
@@ -144,24 +142,6 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int idSpinner = parent.getId();
-
-        if(idSpinner == R.id.spinnerFrequency){
-            int n = Integer.parseInt((String) parent.getItemAtPosition(position));
-            tuner.setStemmeFrekvens(n);
-        }else if(idSpinner == R.id.spinnerPitch){
-            tuner.setPitch(position);
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -176,5 +156,16 @@ public class TunerActivity extends AppCompatActivity implements View.OnClickList
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        int idList = view.getId();
+        if(idList == R.id.textViewFrequencyList){
+            int n = Integer.parseInt((String) parent.getItemAtPosition(position));
+            tuner.setTuningFrequency(n);
+        }else if(idList == R.id.textViewPitchList){
+            tuner.setPitch(position);
+        }
     }
 }
